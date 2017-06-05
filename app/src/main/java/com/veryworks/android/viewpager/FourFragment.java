@@ -73,7 +73,7 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
         // 마시멜로 이상버전에서는 런타임 권한 체크여부를 확인해야 한다.
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             // GPS 사용을 위한 권한 획득이 되어 있지 않으면 리스너 등록을 하지 않는다
-            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_CHECKIN_PROPERTIES)
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED){
                 return;
             }
@@ -93,7 +93,7 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
         // 마시멜로 이상버전에서는 런타임 권한 체크여부를 확인해야 한다.
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             // GPS 사용을 위한 권한 획득이 되어 있지 않으면 리스너를 해제하지 않는다.
-            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_CHECKIN_PROPERTIES)
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED){
                 return;
             }
