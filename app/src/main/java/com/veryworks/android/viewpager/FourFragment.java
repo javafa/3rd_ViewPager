@@ -1,9 +1,13 @@
 package com.veryworks.android.viewpager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +70,14 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
 
+        // 마시멜로 이상버전에서는 런타임 권한 체크여부를 확인해야 한다.
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            // GPS 사용을 위한 권한 획득이 되어 있지 않으면 리스너 등록을 하지 않는다
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_CHECKIN_PROPERTIES)
+                    != PackageManager.PERMISSION_GRANTED){
+                return;
+            }
+        }
         // GPS 리스너 등록
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, // 위치제공자
                 3000, // 변경사항 체크 주기 millisecond
@@ -78,6 +90,16 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onPause() {
         super.onPause();
+        // 마시멜로 이상버전에서는 런타임 권한 체크여부를 확인해야 한다.
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            // GPS 사용을 위한 권한 획득이 되어 있지 않으면 리스너를 해제하지 않는다.
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_CHECKIN_PROPERTIES)
+                    != PackageManager.PERMISSION_GRANTED){
+                return;
+            }
+        }
+        // 리스너 해제
+        manager.removeUpdates(locationListener);
     }
 
 
