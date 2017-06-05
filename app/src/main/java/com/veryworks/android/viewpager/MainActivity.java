@@ -67,13 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
         // 4. 프래그먼트 매니저와 함께 아답터에 전달
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), datas);
-
         // 5. 아답터를 페이저 위젯에 연결
         pager.setAdapter(adapter);
-
         // 6. 페이저가 변경되었을 때 탭을 변경해주는 리스너
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
-
         // 7. 탭이 변경되었때 페이저를 변경해주는 리스너
         tab.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(pager));
 
@@ -108,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     public void cancel(){
         Toast.makeText(this, "권한요청을 승인하셔야 GPS를 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
         finish();
